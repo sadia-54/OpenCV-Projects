@@ -1,6 +1,12 @@
 # pylint: disable=no-member
+import os
 import cv2
 import mediapipe as mp
+
+
+output_dir = './data'
+if not os.path.exists(output_dir):
+    os.makedirs(output_dir)
 
 # read image
 img_path = 'data/face_img.jpeg'
@@ -28,11 +34,14 @@ with mp_face_detection.FaceDetection(model_selection = 0, min_detection_confiden
             w = int(w*W)
             h = int(h*H)
 
-            img = cv2.rectangle(img, (x1, y1), (x1 + w, y1 + h), (0, 255, 0), 5)
+            # img = cv2.rectangle(img, (x1, y1), (x1 + w, y1 + h), (0, 255, 0), 5)
+
+            # blur faces
+            img[y1: y1+h, x1: x1+w, :] = cv2.blur(img[y1: y1+h, x1: x1+w, :], (50, 50) )
 
     cv2.imshow('img', img)
     cv2.waitKey(0)
 
-# blur faces
 
 # save image
+cv2.imwrite(os.path.join(output_dir, 'output.jpeg'), img)
