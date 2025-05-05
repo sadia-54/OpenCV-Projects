@@ -11,7 +11,7 @@ def getLimits(color):
         lowerLimit = np.array([hue - 10, 100, 100], dtype=np.uint8)
         upperLimit = np.array([180, 255, 255], dtype=np.uint8)
 
-    elif hue<= 15:
+    elif hue <= 15:
         lowerLimit = np.array([0, 100, 100], dtype=np.uint8)
         upperLimit = np.array([hue + 10, 255, 255], dtype=np.uint8)
 
